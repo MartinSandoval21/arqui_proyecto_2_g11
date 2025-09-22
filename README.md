@@ -21,7 +21,9 @@ Utiliza los siguientes comandos en tu terminal:
 | `make clean` | Elimina todos los archivos generados. |
 
 ### Código Ejemplo en im.dat
-110000011: B=A+3 
-101000110: A=A+6 
-010010000: B=A-B 
+```
+110000011: B=A+3  
+101000110: A=A+6  
+010010000: B=A-B  
 001100000: A=A and B
+```
