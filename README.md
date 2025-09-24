@@ -27,4 +27,3 @@ Utiliza los siguientes comandos en tu terminal:
 010010000: B=A-B  
 001100000: A=A and B
 ```
-hola
