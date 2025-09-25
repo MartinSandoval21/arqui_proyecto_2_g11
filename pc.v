@@ -1,15 +1,24 @@
-module pc(clk, pc);
-   input clk;
-   output [3: 0] pc;
+module pc(
+    input clk,
+    input reset,           // Reset
+    input [7:0] new_addr,  // Literal
+    input load,            // L_PC desde Control Unit
+    output reg [7:0] addr  // Dirección actual
+);
 
-   reg [3:0]     pc;
-   wire          clk;
+    // Estado inicial para simulación
+    initial begin
+        addr = 8'b00000000;
+    end
 
-   initial begin
-	   pc = 0;
-   end
+    always @(posedge clk) begin
+        if (reset) begin
+            addr <= 8'b00000000;      // Reinicia PC a 0
+        end else if (load) begin
+            addr <= new_addr;         // Salto
+        end else begin
+            addr <= addr + 8'b1;      // Siguiente instrucción
+        end
+    end
 
-   always @(posedge clk) begin
-	   pc <= pc + 1;
-   end
 endmodule
