@@ -19,8 +19,8 @@ module alu (
             4'b0100: Result = A ^ B;                // XOR
             4'b0101: Result = ~A;                   // NOT A
             4'b0110: {C, Result} = {A[6:0], 1'b0};  // SHL
-            4'b0111: {Result, C} = {1'b0, A[7:1]};  // SHR
-            4'b1000: {C, Result} = A + 8'b1;        // INC
+            4'b0111: {Result, C} = {1'b0, A[6:0]};  // SHR
+            4'b1000: {C, Result} = A + 8'b1;        // INC //revisar
             4'b1001: {C, Result} = A - B;           // CMP (solo flags)
             default: Result = 8'b0;
         endcase

@@ -1,5 +1,5 @@
 $date
-	Thu Sep 25 14:05:09 2025
+	Fri Sep 26 15:28:40 2025
 $end
 $version
 	Icarus Verilog
@@ -25,7 +25,7 @@ $var wire 8 , muxA_out [7:0] $end
 $var wire 8 - literal [7:0] $end
 $var wire 15 . instruction [14:0] $end
 $var wire 8 / data_mem_out [7:0] $end
-$var wire 2 0 ctrl_S_D [1:0] $end
+$var wire 1 0 ctrl_S_D $end
 $var wire 2 1 ctrl_S_B [1:0] $end
 $var wire 2 2 ctrl_S_A [1:0] $end
 $var wire 1 3 ctrl_L_PC $end
@@ -62,68 +62,68 @@ $var reg 1 4 L_B $end
 $var reg 1 3 L_PC $end
 $var reg 2 H S_A [1:0] $end
 $var reg 2 I S_B [1:0] $end
-$var reg 2 J S_D [1:0] $end
+$var reg 1 0 S_D $end
 $upscope $end
 $scope module DataMemory $end
 $var wire 1 ! clk $end
-$var wire 8 K data_in [7:0] $end
+$var wire 8 J data_in [7:0] $end
 $var wire 1 # reset $end
 $var wire 1 6 write_enable $end
-$var wire 8 L address [7:0] $end
-$var reg 8 M data_out [7:0] $end
+$var wire 8 K address [7:0] $end
+$var reg 8 L data_out [7:0] $end
 $upscope $end
 $scope module InstructionMemory $end
-$var wire 15 N out [14:0] $end
-$var wire 8 O address [7:0] $end
+$var wire 15 M out [14:0] $end
+$var wire 8 N address [7:0] $end
 $upscope $end
 $scope module MuxA $end
-$var wire 8 P one [7:0] $end
-$var wire 2 Q sel [1:0] $end
-$var wire 8 R zero [7:0] $end
-$var wire 8 S regB [7:0] $end
-$var wire 8 T regA [7:0] $end
-$var reg 8 U out [7:0] $end
+$var wire 8 O one [7:0] $end
+$var wire 2 P sel [1:0] $end
+$var wire 8 Q zero [7:0] $end
+$var wire 8 R regB [7:0] $end
+$var wire 8 S regA [7:0] $end
+$var reg 8 T out [7:0] $end
 $upscope $end
 $scope module MuxB $end
-$var wire 8 V datam [7:0] $end
-$var wire 8 W lit [7:0] $end
-$var wire 2 X sel [1:0] $end
-$var wire 8 Y zero [7:0] $end
-$var wire 8 Z regB [7:0] $end
-$var reg 8 [ out [7:0] $end
+$var wire 8 U datam [7:0] $end
+$var wire 8 V lit [7:0] $end
+$var wire 2 W sel [1:0] $end
+$var wire 8 X zero [7:0] $end
+$var wire 8 Y regB [7:0] $end
+$var reg 8 Z out [7:0] $end
 $upscope $end
 $scope module MuxData $end
-$var wire 8 \ lit [7:0] $end
-$var wire 1 ] sel $end
-$var wire 8 ^ regB [7:0] $end
-$var reg 8 _ out [7:0] $end
+$var wire 8 [ lit [7:0] $end
+$var wire 1 0 sel $end
+$var wire 8 \ regB [7:0] $end
+$var reg 8 ] out [7:0] $end
 $upscope $end
 $scope module ProgramCounter $end
 $var wire 1 ! clk $end
 $var wire 1 3 load $end
-$var wire 8 ` new_addr [7:0] $end
+$var wire 8 ^ new_addr [7:0] $end
 $var wire 1 # reset $end
-$var reg 8 a addr [7:0] $end
+$var reg 8 _ addr [7:0] $end
 $upscope $end
 $scope module Status $end
 $var wire 1 ! clk $end
-$var wire 4 b flags_in [3:0] $end
+$var wire 4 ` flags_in [3:0] $end
 $var wire 1 # reset $end
-$var reg 4 c flags_out [3:0] $end
+$var reg 4 a flags_out [3:0] $end
 $upscope $end
 $scope module regA $end
 $var wire 1 ! clk $end
-$var wire 8 d data_in [7:0] $end
+$var wire 8 b data_in [7:0] $end
 $var wire 1 5 load $end
 $var wire 1 # reset $end
-$var reg 8 e out [7:0] $end
+$var reg 8 c out [7:0] $end
 $upscope $end
 $scope module regB $end
 $var wire 1 ! clk $end
-$var wire 8 f data_in [7:0] $end
+$var wire 8 d data_in [7:0] $end
 $var wire 1 4 load $end
 $var wire 1 # reset $end
-$var reg 8 g out [7:0] $end
+$var reg 8 e out [7:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -133,69 +133,67 @@ $dumpall
 $end
 #0
 $dumpvars
-b0 g
-b0 f
 b0 e
-b0 d
+b11 d
 b0 c
-b1000 b
+b11 b
 b0 a
-b10000011 `
-b10000011 _
-b0 ^
-0]
-b10000011 \
-b0 [
-b0 Z
+b0 `
+b0 _
+b11 ^
+b11 ]
+b0 \
+b11 [
+b11 Z
 b0 Y
 b0 X
-b10000011 W
-bx V
-b0 U
+b10 W
+b11 V
+bx U
 b0 T
 b0 S
 b0 R
 b0 Q
-b1 P
-b0 O
-b110000011 N
-bx M
-b10000011 L
-b0 K
-b0 J
-b0 I
-b0 H
+b10 P
+b1 O
+b0 N
+b1100000011 M
+bx L
+b11 K
+b11 J
+b10 I
+b10 H
 b0 G
 0F
 0E
 0D
 0C
 b0 B
-b1 A
-b0 @
+b11 A
+b11 @
 b0 ?
 b0 >
-b0 =
+b11 =
 0<
 0;
 0:
-19
-b0 8
+09
+b11 8
 b0 7
 06
 05
-04
+14
 03
-b0 2
-b0 1
-b0 0
+b10 2
+b10 1
+00
 bx /
-b110000011 .
-b10000011 -
+b1100000011 .
+b11 -
 b0 ,
-b0 +
-b10000011 *
-b1 )
+b11 +
+b11 *
+b11 )
 b0 (
 b0 '
 b0 &
@@ -206,186 +204,242 @@ b1 "
 0!
 $end
 #5
-b1000110 *
-b1000110 L
-b1000110 _
-b1000110 -
-b1000110 W
-b1000110 \
-b1000110 `
-1C
-b101000110 .
-b101000110 N
+b111 8
+b111 @
+b111 J
+b111 b
+b111 d
+b111 +
+b111 =
+b111 Z
+b111 *
+b111 K
+b111 ]
+15
+b10 1
+b10 I
+b10 W
+b10 2
+b10 H
+b10 P
+04
+b111 -
+b111 V
+b111 [
+b111 ^
+b10 )
+b10 A
+b1000000111 .
+b1000000111 M
 b1 (
-b1 O
-b1 a
-b1000 %
-b1000 B
-b1000 c
+b1 N
+b1 _
+b11 &
+b11 R
+b11 Y
+b11 \
+b11 e
 1!
 #10
 0!
 #15
-b10010000 *
-b10010000 L
-b10010000 _
-b10010000 -
-b10010000 W
-b10010000 \
-b10010000 `
-b0 )
-b0 A
-b10010000 .
-b10010000 N
+b10 `
+1<
+b11 8
+b11 @
+b11 J
+b11 b
+b11 d
+b111 ,
+b111 ?
+b111 T
+b11 +
+b11 =
+b11 Z
+b0 *
+b0 K
+b0 ]
+b111 7
+b111 >
+b111 G
+14
+b0 1
+b0 I
+b0 W
+b0 2
+b0 H
+b0 P
+05
+b0 -
+b0 V
+b0 [
+b0 ^
+b100010 )
+b100010 A
+b111 '
+b111 S
+b111 c
+b10001000000000 .
+b10001000000000 M
 b10 (
-b10 O
-b10 a
+b10 N
+b10 _
 1!
 #20
 0!
 #25
-b1100000 *
-b1100000 L
-b1100000 _
-b1100000 -
-b1100000 W
-b1100000 \
-b1100000 `
-b1100000 .
-b1100000 N
+b0 `
+0<
+b1010 8
+b1010 @
+b1010 J
+b1010 b
+b1010 d
+bx *
+bx K
+bx ]
+b0 7
+b0 >
+b0 G
+04
+bx -
+bx V
+bx [
+bx ^
+bx )
+bx A
+1F
+bx .
+bx M
 b11 (
-b11 O
-b11 a
+b11 N
+b11 _
+b10 %
+b10 B
+b10 a
 1!
 #30
 0!
 #35
-bx *
-bx L
-bx _
-bx -
-bx W
-bx \
-bx `
-bx )
-bx A
-bx .
-bx N
+0F
+b0 %
+b0 B
+b0 a
 b100 (
-b100 O
-b100 a
+b100 N
+b100 _
 1!
 #40
 0!
 #45
 b101 (
-b101 O
-b101 a
+b101 N
+b101 _
 1!
 #50
 0!
 #55
 b110 (
-b110 O
-b110 a
+b110 N
+b110 _
 1!
 #60
 0!
 #65
 b111 (
-b111 O
-b111 a
+b111 N
+b111 _
 1!
 #70
 0!
 #75
 b1000 (
-b1000 O
-b1000 a
+b1000 N
+b1000 _
 1!
 #80
 0!
 #85
 b1001 (
-b1001 O
-b1001 a
+b1001 N
+b1001 _
 1!
 #90
 0!
 #95
 b1010 (
-b1010 O
-b1010 a
+b1010 N
+b1010 _
 1!
 #100
 0!
 #105
 b1011 (
-b1011 O
-b1011 a
+b1011 N
+b1011 _
 1!
 #110
 0!
 #115
 b1100 (
-b1100 O
-b1100 a
+b1100 N
+b1100 _
 1!
 #120
 0!
 #125
 b1101 (
-b1101 O
-b1101 a
+b1101 N
+b1101 _
 1!
 #130
 0!
 #135
 b1110 (
-b1110 O
-b1110 a
+b1110 N
+b1110 _
 1!
 #140
 0!
 #145
 b1111 (
-b1111 O
-b1111 a
+b1111 N
+b1111 _
 1!
 #150
 0!
 #155
 b10000 (
-b10000 O
-b10000 a
+b10000 N
+b10000 _
 1!
 #160
 0!
 #165
 b10001 (
-b10001 O
-b10001 a
+b10001 N
+b10001 _
 1!
 #170
 0!
 #175
 b10010 (
-b10010 O
-b10010 a
+b10010 N
+b10010 _
 1!
 #180
 0!
 #185
 b10011 (
-b10011 O
-b10011 a
+b10011 N
+b10011 _
 1!
 #190
 0!
 #195
 b10100 (
-b10100 O
-b10100 a
+b10100 N
+b10100 _
 1!
 #200
 0!
