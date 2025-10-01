@@ -8,7 +8,7 @@ module control_unit(
     output reg L_B,            // Load Register B 
     output reg [1:0] S_A,      // Selector Mux A 
     output reg [1:0] S_B,      // Selector Mux B 
-    output reg [3:0] ALU_Sel   // Operación ALU (4 bits) REVISAR
+    output reg [2:0] ALU_Sel   // Operación ALU (3 bits)
 );
     wire Z = status_flags[3];
     wire N = status_flags[2];
@@ -24,7 +24,7 @@ module control_unit(
         L_B = 1'b0;
         S_A = 2'b00;
         S_B = 2'b00;
-        ALU_Sel = 4'b0000;
+        ALU_Sel = 3'b000;
 
         case(opcode)
             // === INSTRUCCIONES BÁSICAS ===
@@ -37,7 +37,7 @@ module control_unit(
                 L_B = 1'b0;
                 S_A = 2'b10;
                 S_B = 2'b00;
-                ALU_Sel = 4'b0000;
+                ALU_Sel = 3'b000;
             end
             
             // MOV (B,A) B=A
@@ -49,7 +49,7 @@ module control_unit(
                 L_B = 1'b1;  // 1
                 S_A = 2'b00; // A 
                 S_B = 2'b11; // Z (zero) 
-                ALU_Sel = 4'b0000; //+
+                ALU_Sel = 3'b000; //+
             end
 
             // MOV (A,Lit) A=Lit
@@ -61,7 +61,7 @@ module control_unit(
                 L_B = 1'b0;  // 0
                 S_A = 2'b10; // Z (zero) 
                 S_B = 2'b10; // Lit 
-                ALU_Sel = 4'b0000; //+
+                ALU_Sel = 3'b000; //+
             end
 
             // MOV (B,Lit) B=Lit
@@ -73,7 +73,7 @@ module control_unit(
                 L_B = 1'b1;  // 1
                 S_A = 2'b10; // Z (zero) 
                 S_B = 2'b10; // Lit 
-                ALU_Sel = 4'b0000; //+
+                ALU_Sel = 3'b000; //+
             end
 
             // ADD (A,B) A=A+B
@@ -85,7 +85,7 @@ module control_unit(
                 L_B = 1'b0;  // 0
                 S_A = 2'b00; // A 
                 S_B = 2'b00; // B 
-                ALU_Sel = 4'b0000; //+
+                ALU_Sel = 3'b000; //+
             end
 
             // ADD (B,A) B=A+B
@@ -97,7 +97,7 @@ module control_unit(
                 L_B = 1'b1;  // 0
                 S_A = 2'b00; // A 
                 S_B = 2'b00; // B 
-                ALU_Sel = 4'b0000; //+
+                ALU_Sel = 3'b000; //+
             end
 
             // ADD (A,Lit) A=A+Lit
@@ -109,7 +109,7 @@ module control_unit(
                 L_B = 1'b0;  // 0
                 S_A = 2'b00; // A 
                 S_B = 2'b10; // Lit 
-                ALU_Sel = 4'b0000; //+
+                ALU_Sel = 3'b000; //+
             end
 
             // ADD (B,Lit) B=B+Lit
@@ -121,7 +121,7 @@ module control_unit(
                 L_B = 1'b1;  // 1
                 S_A = 2'b01; // B 
                 S_B = 2'b10; // Lit 
-                ALU_Sel = 4'b0000; //+
+                ALU_Sel = 3'b000; //+
             end
 
             // SUB (A,B) A=A-B
@@ -133,7 +133,7 @@ module control_unit(
                 L_B = 1'b0;  // 0
                 S_A = 2'b00; // A 
                 S_B = 2'b00; // B 
-                ALU_Sel = 4'b0001; //-
+                ALU_Sel = 3'b001; //-
             end
 
             // SUB (B,A) B=A-B
@@ -145,7 +145,7 @@ module control_unit(
                 L_B = 1'b1;  // 0
                 S_A = 2'b00; // A 
                 S_B = 2'b00; // B 
-                ALU_Sel = 4'b0001; //-
+                ALU_Sel = 3'b001; //-
             end
 
             // SUB (A,Lit) A=A-Lit
@@ -157,7 +157,7 @@ module control_unit(
                 L_B = 1'b0;  // 0
                 S_A = 2'b00; // A 
                 S_B = 2'b10; // Lit 
-                ALU_Sel = 4'b0001; //-
+                ALU_Sel = 3'b001; //-
             end
 
             // SUB (B,Lit) B=B-Lit
@@ -169,7 +169,7 @@ module control_unit(
                 L_B = 1'b1;  // 1
                 S_A = 2'b01; // B 
                 S_B = 2'b10; // Lit 
-                ALU_Sel = 4'b0001; //-
+                ALU_Sel = 3'b001; //-
             end
 
             // AND (A,B) A=A and B
@@ -181,7 +181,7 @@ module control_unit(
                 L_B = 1'b0;  // 0
                 S_A = 2'b00; // A 
                 S_B = 2'b00; // B 
-                ALU_Sel = 4'b0010; // &
+                ALU_Sel = 3'b010; // &
             end
 
             // AND (B,A) B=A and B
@@ -193,7 +193,7 @@ module control_unit(
                 L_B = 1'b1;  // 1
                 S_A = 2'b00; // A 
                 S_B = 2'b00; // B 
-                ALU_Sel = 4'b0010; // &
+                ALU_Sel = 3'b010; // &
             end
 
             // AND (A,Lit) A=A and Lit
@@ -205,7 +205,7 @@ module control_unit(
                 L_B = 1'b0;  // 0
                 S_A = 2'b00; // A 
                 S_B = 2'b10; // Lit 
-                ALU_Sel = 4'b0010; // &
+                ALU_Sel = 3'b010; // &
             end
 
             // AND (B,Lit) B=B and Lit
@@ -217,7 +217,7 @@ module control_unit(
                 L_B = 1'b1;  // 1
                 S_A = 2'b01; // B 
                 S_B = 2'b10; // Lit 
-                ALU_Sel = 4'b0010; // &
+                ALU_Sel = 3'b010; // &
             end
 
             // OR (A,B) A=A or B
@@ -229,7 +229,7 @@ module control_unit(
                 L_B = 1'b0;  // 0
                 S_A = 2'b00; // A 
                 S_B = 2'b00; // B 
-                ALU_Sel = 4'b0011; // or
+                ALU_Sel = 3'b011; // or
             end
 
             // OR (B,A) B=A or B
@@ -241,7 +241,7 @@ module control_unit(
                 L_B = 1'b1;  // 1
                 S_A = 2'b00; // A 
                 S_B = 2'b00; // B 
-                ALU_Sel = 4'b0011; // or
+                ALU_Sel = 3'b011; // or
             end
 
             // OR (A,Lit) A=A or Lit
@@ -253,7 +253,7 @@ module control_unit(
                 L_B = 1'b0;  // 0
                 S_A = 2'b00; // A 
                 S_B = 2'b10; // Lit 
-                ALU_Sel = 4'b0011; // or
+                ALU_Sel = 3'b011; // or
             end
 
             // OR (B,Lit) B=B or Lit
@@ -265,7 +265,7 @@ module control_unit(
                 L_B = 1'b1;  // 1
                 S_A = 2'b01; // B 
                 S_B = 2'b10; // Lit 
-                ALU_Sel = 4'b0011; // or
+                ALU_Sel = 3'b011; // or
             end
 
             // NOT (A,A) A=-A
@@ -277,7 +277,7 @@ module control_unit(
                 L_B = 1'b0;  // 0
                 S_A = 2'b00; // A 
                 S_B = 2'b00; // B (CUALQUIER VALOR)
-                ALU_Sel = 4'b0101; // NOT
+                ALU_Sel = 3'b101; // NOT
             end
 
             // NOT (A,B) A=-B
@@ -289,7 +289,7 @@ module control_unit(
                 L_B = 1'b0;  // 0
                 S_A = 2'b01; // B 
                 S_B = 2'b00; // B (CUALQUIER VALOR)
-                ALU_Sel = 4'b0101; // NOT
+                ALU_Sel = 3'b101; // NOT
             end
 
             // NOT (B,A) B=-A
@@ -301,7 +301,7 @@ module control_unit(
                 L_B = 1'b1;  // 1
                 S_A = 2'b00; // A 
                 S_B = 2'b10; // Lit (CUALQUIER VALOR)
-                ALU_Sel = 4'b0101; // NOT
+                ALU_Sel = 3'b101; // NOT
             end
 
             // NOT (B,B) B=-B
@@ -313,7 +313,7 @@ module control_unit(
                 L_B = 1'b1;  // 1
                 S_A = 2'b01; // B 
                 S_B = 2'b10; // Lit (CUALQUIER VALOR)
-                ALU_Sel = 4'b0101; // NOT
+                ALU_Sel = 3'b101; // NOT
             end
 
             // XOR (A,B) A=A Xor B
@@ -325,7 +325,7 @@ module control_unit(
                 L_B = 1'b0;  // 0
                 S_A = 2'b00; // A 
                 S_B = 2'b00; // B 
-                ALU_Sel = 4'b0100; // xor
+                ALU_Sel = 3'b100; // xor
             end
 
             // XOR (B,A) B=A xor B
@@ -337,7 +337,7 @@ module control_unit(
                 L_B = 1'b1;  // 1
                 S_A = 2'b00; // A 
                 S_B = 2'b00; // B 
-                ALU_Sel = 4'b0100; // xor
+                ALU_Sel = 3'b100; // xor
             end
 
             // XOR (A,Lit) A=A xor Lit
@@ -349,7 +349,7 @@ module control_unit(
                 L_B = 1'b0;  // 0
                 S_A = 2'b00; // A 
                 S_B = 2'b10; // Lit 
-                ALU_Sel = 4'b0100; // xor
+                ALU_Sel = 3'b100; // xor
             end
 
             // XOR (B,Lit) B=B xor Lit
@@ -361,7 +361,7 @@ module control_unit(
                 L_B = 1'b1;  // 1
                 S_A = 2'b01; // B 
                 S_B = 2'b10; // Lit 
-                ALU_Sel = 4'b0100; // xor
+                ALU_Sel = 3'b100; // xor
             end
 
             // SHL (A,A) A=shift left A
@@ -373,7 +373,7 @@ module control_unit(
                 L_B = 1'b0;  // 0
                 S_A = 2'b00; // A 
                 S_B = 2'b00; // B (cualquier valor)
-                ALU_Sel = 4'b0110; // SHL
+                ALU_Sel = 3'b110; // SHL
             end
 
             // SHL (A,B) A=shift left B
@@ -385,7 +385,7 @@ module control_unit(
                 L_B = 1'b0;  // 0
                 S_A = 2'b01; // B 
                 S_B = 2'b00; // B (cualquier valor)
-                ALU_Sel = 4'b0110; // SHL
+                ALU_Sel = 3'b110; // SHL
             end
 
             // SHL (B,A) B=shift left A
@@ -397,7 +397,7 @@ module control_unit(
                 L_B = 1'b1;  // 1
                 S_A = 2'b00; // A 
                 S_B = 2'b00; // B (cualquier valor)
-                ALU_Sel = 4'b0110; // SHL
+                ALU_Sel = 3'b110; // SHL
             end
 
             // SHL (B,B) B=shift left B
@@ -409,7 +409,7 @@ module control_unit(
                 L_B = 1'b1;  // 1
                 S_A = 2'b01; // B 
                 S_B = 2'b00; // B (cualquier valor)
-                ALU_Sel = 4'b0110; // SHL
+                ALU_Sel = 3'b110; // SHL
             end
 
             // SHR (A,A) A=shift right A
@@ -421,7 +421,7 @@ module control_unit(
                 L_B = 1'b0;  // 0
                 S_A = 2'b00; // A 
                 S_B = 2'b00; // B (cualquier valor)
-                ALU_Sel = 4'b0111; // SHR
+                ALU_Sel = 3'b111; // SHR
             end
 
             // SHL (A,B) A=shift right B
@@ -433,7 +433,7 @@ module control_unit(
                 L_B = 1'b0;  // 0
                 S_A = 2'b01; // B 
                 S_B = 2'b00; // B (cualquier valor)
-                ALU_Sel = 4'b0111; // SHR
+                ALU_Sel = 3'b111; // SHR
             end
 
             // SHL (B,A) B=shift right A
@@ -445,7 +445,7 @@ module control_unit(
                 L_B = 1'b1;  // 1
                 S_A = 2'b00; // A 
                 S_B = 2'b00; // B (cualquier valor)
-                ALU_Sel = 4'b0111; // SHR
+                ALU_Sel = 3'b111; // SHR
             end
 
             // SHL (B,B) B=shift right B
@@ -457,7 +457,7 @@ module control_unit(
                 L_B = 1'b1;  // 1
                 S_A = 2'b01; // B 
                 S_B = 2'b00; // B (cualquier valor)
-                ALU_Sel = 4'b0111; // SHR
+                ALU_Sel = 3'b111; // SHR
             end
 
             // INC (B) B=B+1
@@ -469,7 +469,7 @@ module control_unit(
                 L_B = 1'b1;  // 1
                 S_A = 2'b11; // U 
                 S_B = 2'b00; // B (cualquier valor)
-                ALU_Sel = 4'b0000; // +
+                ALU_Sel = 3'b000; // +
             end
 
             
@@ -483,7 +483,7 @@ module control_unit(
                 L_B = 1'b0;
                 S_A = 2'b00;
                 S_B = 2'b01;
-                ALU_Sel = 4'b0000;
+                ALU_Sel = 3'b000;
             end
             
             // SUB (A,Dir) A=A-Mem[Lit]
@@ -495,7 +495,7 @@ module control_unit(
                 L_B = 1'b0;
                 S_A = 2'b00;
                 S_B = 2'b01;
-                ALU_Sel = 4'b0001;
+                ALU_Sel = 3'b001;
             end
 
             // AND (A,Dir) A=A and Mem[Lit]
@@ -507,7 +507,7 @@ module control_unit(
                 L_B = 1'b0;
                 S_A = 2'b00;
                 S_B = 2'b01;
-                ALU_Sel = 4'b0010;
+                ALU_Sel = 3'b010;
             end
 
             // OR (A,Dir) A=A or Mem[Lit]
@@ -519,7 +519,7 @@ module control_unit(
                 L_B = 1'b0;
                 S_A = 2'b00;
                 S_B = 2'b01;
-                ALU_Sel = 4'b0011; // NOT
+                ALU_Sel = 3'b011; // NOT
             end
 
             // NOT (Dir,A) Mem[Lit] = -A
@@ -531,7 +531,7 @@ module control_unit(
                 L_B = 1'b0; // 0
                 S_A = 2'b00; // A
                 S_B = 2'b11; // cualquier valor (zero)
-                ALU_Sel = 4'b0101; // NOT
+                ALU_Sel = 3'b101; // NOT
             end
 
             // XOR (A,Dir) A = A xor Mem[Lit]
@@ -543,7 +543,7 @@ module control_unit(
                 L_B = 1'b0; // 0
                 S_A = 2'b00; // A
                 S_B = 2'b01; // Mem
-                ALU_Sel = 4'b0100; // XOR
+                ALU_Sel = 3'b100; // XOR
             end
 
             // SHL (Dir,A) Mem[Lit]= shift left A
@@ -555,7 +555,7 @@ module control_unit(
                 L_B = 1'b0; // 0
                 S_A = 2'b00; // A
                 S_B = 2'b11; // cualquier valor (zero)
-                ALU_Sel = 4'b0110; // SHL
+                ALU_Sel = 3'b110; // SHL
             end
 
             // INC (Dir) Mem[Lit]= Mem[Lit] + 1
@@ -567,7 +567,7 @@ module control_unit(
                 L_B = 1'b0; // 0
                 S_A = 2'b11; // U
                 S_B = 2'b01; // Mem
-                ALU_Sel = 4'b0000; // +
+                ALU_Sel = 3'b000; // +
             end
 
             // RST (Dir) Mem[Lit]= 0
@@ -579,7 +579,7 @@ module control_unit(
                 L_B = 1'b0; // 0
                 S_A = 2'b10; // ZERO
                 S_B = 2'b11; // ZERO
-                ALU_Sel = 4'b0000; // +
+                ALU_Sel = 3'b000; // +
             end
             // === INSTRUCCIONES DE SALTO ===
             

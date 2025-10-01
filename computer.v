@@ -18,7 +18,7 @@ module computer(
     wire [0:0] ctrl_S_D;
     wire [1:0] ctrl_S_A, ctrl_S_B;
     wire ctrl_L_A, ctrl_L_B;
-    wire [3:0] ctrl_ALU_Sel;
+    wire [2:0] ctrl_ALU_Sel;
     
     // ALU
     wire [7:0] alu_out;
