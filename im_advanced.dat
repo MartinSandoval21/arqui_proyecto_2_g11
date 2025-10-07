@@ -1,0 +1,293 @@
+// ===============================================
+// TEST DE INSTRUCCIONES AVANZADAS - MEMORIA Y SALTO
+// ===============================================
+
+// --- Test 1: Instrucciones de Memoria con Dirección Directa ---
+// Instruction 1: MOV A, 100 (cargar valor inicial en A)
+000001001100100
+
+// Instruction 2: MOV B, 200 (cargar valor inicial en B)  
+000001111001000
+
+// Instruction 3: MOV A, (10) - A = Mem[10] (dirección 10)
+010010100001010
+
+// Instruction 4: MOV B, (20) - B = Mem[20] (dirección 20)
+010011000101000
+
+// Instruction 5: MOV (5), A - Mem[5] = A (escribir A en dirección 5)
+010011100000101
+
+// Instruction 6: MOV (15), B - Mem[15] = B (escribir B en dirección 15)
+010100000111111
+
+// --- Test 2: Instrucciones de Memoria con Direccionamiento Indirecto ---
+// Instruction 7: MOV A, 25 (cargar dirección en A)
+000001000011001
+
+// Instruction 8: MOV A, (A) - A = Mem[A] = Mem[25] (direccionamiento indirecto)
+010100100000000
+
+// Instruction 9: MOV B, 30 (cargar dirección en B)
+000001100011110
+
+// Instruction 10: MOV (B), A - Mem[B] = Mem[30] = A (escribir A en dirección 30)
+010101100000000
+
+// --- Test 3: Operaciones Aritméticas con Memoria ---
+// Instruction 11: MOV A, 50 (cargar valor en A)
+000001000110010
+
+// Instruction 12: MOV B, 75 (cargar valor en B)
+000001100100101
+
+// Instruction 13: ADD (A, Dir) - A = A + Mem[40] (sumar A con Mem[40])
+010110000101000
+
+// Instruction 14: ADD (B, Dir) - B = B + Mem[50] (sumar B con Mem[50])
+010110100110010
+
+// Instruction 15: ADD (A, B) - A = A + Mem[B] (sumar A con Mem[B])
+010111000000000
+
+// Instruction 16: ADD (Dir) - Mem[60] = A + B (escribir suma en Mem[60])
+010111100111100
+
+// --- Test 4: Operaciones Lógicas con Memoria ---
+// Instruction 17: MOV A, 170 (10101010)
+000001010101010
+
+// Instruction 18: MOV B, 85 (01010101)
+000001100101010
+
+// Instruction 19: AND (A, Dir) - A = A & Mem[70]
+011010000100011
+
+// Instruction 20: OR (B, Dir) - B = B | Mem[80]
+011100100101000
+
+// Instruction 21: XOR (A, B) - A = A ^ Mem[B]
+100000100000000
+
+// --- Test 5: Instrucciones de Desplazamiento con Memoria ---
+// Instruction 22: MOV A, 8 (00001000)
+000001000001000
+
+// Instruction 23: SHL (Dir, A) - Mem[90] = A << 1
+100001100101101
+
+// Instruction 24: MOV B, 16 (00010000)
+000001100010000
+
+// Instruction 25: SHR (Dir, B) - Mem[100] = B >> 1
+100011100110010
+
+// --- Test 6: Instrucciones de Incremento y Reset ---
+// Instruction 26: INC (Dir) - Mem[110] = Mem[110] + 1
+100100100110111
+
+// Instruction 27: INC (B) - Mem[B] = Mem[B] + 1
+100101000000000
+
+// Instruction 28: RST (Dir) - Mem[120] = 0
+100101100111100
+
+// Instruction 29: RST (B) - Mem[B] = 0
+100110000000000
+
+// --- Test 7: Instrucciones de Comparación ---
+// Instruction 30: MOV A, 100
+000001001100100
+
+// Instruction 31: MOV B, 100
+000001111001000
+
+// Instruction 32: CMP A, B - Comparar A con B (debería establecer Z=1)
+100110100000000
+
+// Instruction 33: MOV A, 50
+000001000110010
+
+// Instruction 34: CMP A, 50 - Comparar A con literal 50 (debería establecer Z=1)
+100111000110010
+
+// Instruction 35: MOV B, 75
+000001100100101
+
+// Instruction 36: CMP B, 100 - Comparar B con literal 100 (debería establecer N=1)
+100111100110010
+
+// --- Test 8: Instrucciones de Salto Incondicional ---
+// Instruction 37: JMP 200 - Saltar a la dirección 200
+101001100110010
+
+// Instruction 38: NOP (instrucción dummy en caso de que no salte)
+000000000000000
+
+// --- Test 9: Instrucciones de Salto Condicional ---
+// Instruction 39: MOV A, 10
+000001000001010
+
+// Instruction 40: MOV B, 10
+000001100001010
+
+// Instruction 41: CMP A, B - Establecer Z=1
+100110100000000
+
+// Instruction 42: JEQ 250 - Saltar si Z=1 (debería saltar)
+101010011111010
+
+// Instruction 43: NOP (no debería ejecutarse)
+000000000000000
+
+// Instruction 44: MOV A, 5
+000001000000101
+
+// Instruction 45: CMP A, 10 - Establecer Z=0, N=1
+100111000001010
+
+// Instruction 46: JNE 260 - Saltar si Z=0 (debería saltar)
+101010100000100
+
+// Instruction 47: NOP (no debería ejecutarse)
+000000000000000
+
+// Instruction 48: MOV A, 15
+000001000001111
+
+// Instruction 49: CMP A, 10 - Establecer Z=0, N=0
+100111000001010
+
+// Instruction 50: JGT 270 - Saltar si N=0 y Z=0 (debería saltar)
+101011000010111
+
+// Instruction 51: NOP (no debería ejecutarse)
+000000000000000
+
+// Instruction 52: MOV A, 5
+000001000000101
+
+// Instruction 53: CMP A, 10 - Establecer Z=0, N=1
+100111000001010
+
+// Instruction 54: JLT 280 - Saltar si N=1 (debería saltar)
+101011100011000
+
+// Instruction 55: NOP (no debería ejecutarse)
+000000000000000
+
+// --- Test 10: Instrucciones de Salto con Flags de Carry y Overflow ---
+// Instruction 56: MOV A, 200
+000001011001000
+
+// Instruction 57: ADD A, 100 - Esto debería generar carry
+000011001100100
+
+// Instruction 58: JCR 290 - Saltar si C=1 (debería saltar)
+101101000100101
+
+// Instruction 59: NOP (no debería ejecutarse)
+000000000000000
+
+// Instruction 60: MOV A, 128
+000001010000000
+
+// Instruction 61: ADD A, 128 - Esto debería generar overflow
+000011010000000
+
+// Instruction 62: JOV 300 - Saltar si V=1 (debería saltar)
+101101100100110
+
+// Instruction 63: NOP (no debería ejecutarse)
+000000000000000
+
+// --- Test 11: Instrucciones de Salto con Flags Combinados ---
+// Instruction 64: MOV A, 10
+000001000001010
+
+// Instruction 65: CMP A, 10 - Establecer Z=1
+100111000001010
+
+// Instruction 66: JGE 310 - Saltar si N=0 (debería saltar)
+101100000100111
+
+// Instruction 67: NOP (no debería ejecutarse)
+000000000000000
+
+// Instruction 68: MOV A, 5
+000001000000101
+
+// Instruction 69: CMP A, 10 - Establecer Z=0, N=1
+100111000001010
+
+// Instruction 70: JLE 320 - Saltar si N=1 o Z=1 (debería saltar)
+101100100101000
+
+// Instruction 71: NOP (no debería ejecutarse)
+000000000000000
+
+// --- Test 12: Instrucciones NOT con Memoria ---
+// Instruction 72: MOV A, 170 (10101010)
+000001010101010
+
+// Instruction 73: NOT (Dir, A) - Mem[130] = ~A
+011110000100001
+
+// Instruction 74: MOV B, 85 (01010101)
+000001100101010
+
+// Instruction 75: NOT (Dir, B) - Mem[140] = ~B
+011110100100100
+
+// Instruction 76: NOT (B) - Mem[B] = ~A
+011111000000000
+
+// --- Test 13: Instrucciones de Desplazamiento con Memoria (completas) ---
+// Instruction 77: MOV A, 4 (00000100)
+000001000000100
+
+// Instruction 78: SHL (Dir, A) - Mem[150] = A << 1
+100001100100101
+
+// Instruction 79: SHL (Dir, B) - Mem[160] = B << 1
+100010000101000
+
+// Instruction 80: SHL (B) - Mem[B] = A << 1
+100010100000000
+
+// Instruction 81: MOV A, 8 (00001000)
+000001000001000
+
+// Instruction 82: SHR (Dir, A) - Mem[170] = A >> 1
+100011000101010
+
+// Instruction 83: SHR (Dir, B) - Mem[180] = B >> 1
+100011100101101
+
+// Instruction 84: SHR (B) - Mem[B] = A >> 1
+100100000000000
+
+// --- Test 14: Prueba Final - Secuencia Compleja ---
+// Instruction 85: MOV A, 42
+000001001010010
+
+// Instruction 86: MOV B, 24
+000001100011000
+
+// Instruction 87: ADD A, B - A = 42 + 24 = 66
+000010000000000
+
+// Instruction 88: MOV (190), A - Mem[190] = 66
+010011101011110
+
+// Instruction 89: CMP A, 66 - Verificar que A = 66
+100111000100010
+
+// Instruction 90: JEQ 400 - Saltar si A = 66
+101010011100000
+
+// Instruction 91: NOP (no debería ejecutarse)
+000000000000000
+
+// Instruction 92: MOV A, 255 (instrucción final)
+000001011111111
