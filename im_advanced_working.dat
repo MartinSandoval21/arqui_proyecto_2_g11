@@ -1,0 +1,24 @@
+// Test avanzado simplificado - solo instrucciones que funcionan
+// Test 1: Memoria con Dirección Directa
+000001001100100  // MOV A, 100
+000001111001000  // MOV B, 200
+010011100000101  // MOV (5), A
+010100000111111  // MOV (15), B
+010010100000101  // MOV A, (5)
+010011000111111  // MOV B, (15)
+
+// Test 2: Direccionamiento Indirecto
+000001000011001  // MOV A, 25
+010100100000000  // MOV A, (A) - indirecto
+000001100011110  // MOV B, 30
+000001000110010  // MOV A, 50
+010101100000000  // MOV (B), A - indirecto
+010010100011110  // MOV A, (30)
+
+// Test 3: Operaciones Aritméticas básicas
+000001000110010  // MOV A, 50
+000001100100101  // MOV B, 75
+000010000000000  // ADD A, B
+000001000001010  // MOV A, 10
+000001100000011  // MOV B, 3
+000010000000000  // ADD A, B
