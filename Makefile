@@ -1,12 +1,15 @@
 # Archivos del proyecto
 VERILOG_FILES = alu.v computer.v control_unit.v data_memory.v instruction_memory.v muxA.v muxB.v muxData.v pc.v regA.v regB.v status.v
 TESTBENCH_FILE = testbench.v
+TESTBENCH_ADVANCED_FILE = testbench_advanced.v
 YOSYS_SCRIPT = yosys.tcl
 
 # Rutas de salida
 OUT_DIR = out
 OUT_FILE = computer
+OUT_FILE_ADVANCED = computer_advanced
 WAVEFORM_FILE = $(OUT_DIR)/dump.vcd
+WAVEFORM_FILE_ADVANCED = $(OUT_DIR)/dump_advanced.vcd
 
 # Target por defecto
 all: build run
@@ -15,21 +18,37 @@ all: build run
 $(OUT_DIR):
 	@mkdir -p $(OUT_DIR)
 
-# Target para construir el ejecutable de simulación
+# Target para construir el ejecutable de simulación básico
 build: $(OUT_DIR)
-	@echo "Construyendo ejecutable de simulación..."
+	@echo "Construyendo ejecutable de simulación básico..."
 	iverilog -o $(OUT_DIR)/$(OUT_FILE) $(VERILOG_FILES) $(TESTBENCH_FILE)
 	@echo "Construcción exitosa. Ejecutable creado en $(OUT_DIR)/$(OUT_FILE)"
 
-# Target para ejecutar la simulación
+# Target para construir el ejecutable de simulación avanzado
+build-advanced: $(OUT_DIR)
+	@echo "Construyendo ejecutable de simulación avanzado..."
+	iverilog -o $(OUT_DIR)/$(OUT_FILE_ADVANCED) $(VERILOG_FILES) $(TESTBENCH_ADVANCED_FILE)
+	@echo "Construcción exitosa. Ejecutable avanzado creado en $(OUT_DIR)/$(OUT_FILE_ADVANCED)"
+
+# Target para ejecutar la simulación básica
 run:
-	@echo "Ejecutando simulación..."
+	@echo "Ejecutando simulación básica..."
 	vvp $(OUT_DIR)/$(OUT_FILE)
 
-# Target para ver las formas de onda
+# Target para ejecutar la simulación avanzada
+run-advanced: build-advanced
+	@echo "Ejecutando simulación avanzada..."
+	vvp $(OUT_DIR)/$(OUT_FILE_ADVANCED)
+
+# Target para ver las formas de onda básicas
 wave:
-	@echo "Abriendo formas de onda con GTKWave..."
+	@echo "Abriendo formas de onda básicas con GTKWave..."
 	gtkwave $(WAVEFORM_FILE)
+
+# Target para ver las formas de onda avanzadas
+wave-advanced:
+	@echo "Abriendo formas de onda avanzadas con GTKWave..."
+	gtkwave $(WAVEFORM_FILE_ADVANCED)
 
 # Target para síntesis
 synth: $(OUT_DIR)
@@ -44,4 +63,4 @@ clean:
 	@rm -f yosys.log
 	@echo "Limpieza completa."
 
-.PHONY: all build run wave synth clean
+.PHONY: all build build-advanced run run-advanced wave wave-advanced synth clean
