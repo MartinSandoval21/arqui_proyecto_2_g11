@@ -1,14 +1,14 @@
 # Archivos del proyecto
 VERILOG_FILES = alu.v computer.v control_unit.v data_memory.v instruction_memory.v muxA.v muxB.v muxData.v pc.v regA.v regB.v status.v
-TESTBENCH_FILE = testbench.v
-TESTBENCH_ADVANCED_FILE = testbench_advanced.v
+TESTBENCH_FILE = testbench_memory.v
+TESTBENCH_ADVANCED_FILE = testbench_memory.v
 YOSYS_SCRIPT = yosys.tcl
 
 # Rutas de salida
 OUT_DIR = out
 OUT_FILE = computer
 OUT_FILE_ADVANCED = computer_advanced
-WAVEFORM_FILE = $(OUT_DIR)/dump.vcd
+WAVEFORM_FILE = $(OUT_DIR)/dump_advanced.vcd
 WAVEFORM_FILE_ADVANCED = $(OUT_DIR)/dump_advanced.vcd
 
 # Target por defecto

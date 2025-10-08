@@ -72,7 +72,7 @@ module computer(
     );
 
     // 4. DATA MEMORY
-    data_memory DataMemory(
+    data_memory DM(
         .clk(clk),
         .reset(reset),
         .data_in(alu_out),

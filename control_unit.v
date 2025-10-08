@@ -476,11 +476,11 @@ module control_unit(
             // === INSTRUCCIONES CON DIRECCIONAMIENTO ===
             // MOV A,(Dir) A=Mem[Lit]
             7'b0100101: begin
-                L_PC = 1'b0;
-                D_W = 1'b0;
-                S_D = 1'b0;
-                L_A = 1'b1;
-                L_B = 1'b0;
+                L_PC = 1'b0; //0
+                D_W = 1'b0; //0
+                S_D = 1'b0; //Lit
+                L_A = 1'b1; // Cargar A
+                L_B = 1'b0; // No Cargar B
                 S_A = 2'b10; // Z
                 S_B = 2'b01; // Mem
                 ALU_Sel = 3'b000; // +
@@ -488,11 +488,11 @@ module control_unit(
             
             // MOV B,(Dir) B=Mem[Lit]
             7'b0100110: begin
-                L_PC = 1'b0;
-                D_W = 1'b0;
-                S_D = 1'b0;
-                L_A = 1'b0;
-                L_B = 1'b1;
+                L_PC = 1'b0; // 0
+                D_W = 1'b0; // 0
+                S_D = 1'b0; // Lit
+                L_A = 1'b0; //No Cargar A
+                L_B = 1'b1; // Cragar B
                 S_A = 2'b10; // Z
                 S_B = 2'b01; // Mem
                 ALU_Sel = 3'b000; // +
@@ -500,12 +500,12 @@ module control_unit(
             
             // MOV (Dir),A Mem[Lit]=A
             7'b0100111: begin
-                L_PC = 1'b0;
-                D_W = 1'b1;
-                S_D = 1'b0;
-                L_A = 1'b0;
-                L_B = 1'b0;
-                S_A = 2'b00; // A
+                L_PC = 1'b0; //No Salto
+                D_W = 1'b1; // Escribir en Mem
+                S_D = 1'b0; // Lit
+                L_A = 1'b0; // No cargar A
+                L_B = 1'b0; // No Cargar B
+                S_A = 2'b00; // Dejar pasar A
                 S_B = 2'b11; // Z
                 ALU_Sel = 3'b000; // +
             end
@@ -769,8 +769,8 @@ module control_unit(
                 S_D = 1'b0; // Lit
                 L_A = 1'b0;
                 L_B = 1'b0;
-                S_A = 2'b10; // Z
-                S_B = 2'b00; // B
+                S_A = 2'b01; // B
+                S_B = 2'b11; // Z
                 ALU_Sel = 3'b101; // NOT
             end
             
@@ -853,8 +853,8 @@ module control_unit(
                 S_D = 1'b0; // Lit
                 L_A = 1'b0;
                 L_B = 1'b0;
-                S_A = 2'b10; // Z
-                S_B = 2'b00; // B
+                S_A = 2'b01; // B
+                S_B = 2'b11; // Z
                 ALU_Sel = 3'b110; // SHL
             end
             
@@ -889,8 +889,8 @@ module control_unit(
                 S_D = 1'b0; // Lit
                 L_A = 1'b0;
                 L_B = 1'b0;
-                S_A = 2'b10; // Z
-                S_B = 2'b00; // B
+                S_A = 2'b01; // B
+                S_B = 2'b11; // Z
                 ALU_Sel = 3'b111; // SHR
             end
             
@@ -959,7 +959,7 @@ module control_unit(
             7'b1001101: begin
                 L_PC = 1'b0;
                 D_W = 1'b0;
-                S_D = 1'b0; // Don't care
+                S_D = 1'b0; // Cualquier valor
                 L_A = 1'b0; // No carga en A
                 L_B = 1'b0; // No carga en B
                 S_A = 2'b00; // A
