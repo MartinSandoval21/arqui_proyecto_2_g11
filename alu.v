@@ -19,7 +19,7 @@ module alu (
             3'b100: Result = A ^ B;                // XOR
             3'b101: Result = ~A;                   // NOT A
             3'b110: {C, Result} = {A[6:0], 1'b0};  // SHL
-            3'b111: {Result, C} = {1'b0, A[6:0]};  // SHR
+            3'b111: {Result, C} = {1'b0, A[7:1], A[0]};  // SHR
             default: Result = 8'b0;
         endcase
 

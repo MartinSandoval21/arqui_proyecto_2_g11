@@ -902,7 +902,7 @@ module control_unit(
                 L_A = 1'b0;
                 L_B = 1'b0;
                 S_A = 2'b00; // A
-                S_B = 2'b11; // Z
+                S_B = 2'b00; // b
                 ALU_Sel = 3'b111; // SHR
             end
             
